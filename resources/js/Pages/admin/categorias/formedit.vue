@@ -1,0 +1,71 @@
+<template>
+    <Adminlayout>
+        <div class="h-full flex flex-col justify-center">
+
+            <NavLink 
+                href="/admin/categorias"
+                class=" mb-4 inline-block w-auto text-gray-500 text-center hover:border-0"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+            </svg>
+Volver
+            </NavLink>            
+
+            <h1 class="text-indigo-800 text-xl leading-3 font-bold">Editar categoría</h1>
+
+            
+
+            <form class="w-full" @submit.prevent="submitForm">
+                <div class="my-5">
+                    <label
+                        class="block text-sm mb-1"
+                    >Nombre</label>
+                    <input 
+                        placeholder="Ingrese el nombre de su categoría"
+                        class="p-2 w-full"
+                        v-model="nuevaCategoria.name"
+                    />
+                </div>
+                <input 
+                    type="submit"
+                    value="Editar Categoría"
+                    class="bg-sky-500 hover:bg-sky-700 transition-all cursor-pointer text-white w-full text-sm py-2"
+                />
+            </form>
+        </div>
+    </Adminlayout>
+</template>
+
+<script>
+import Adminlayout from '../../../Layouts/adminlayout.vue';
+import NavLink from '@/Components/NavLink.vue';
+
+
+    export default{
+        components:{
+            Adminlayout,
+            NavLink
+        },
+        props:{
+            categoria: Object
+        },
+        data(){
+            return{
+                nuevaCategoria: {
+                    name: this.categoria.name || ''
+                }
+            }
+        },
+        methods:{
+            submitForm(){
+
+                // TODO VALIDACION
+                console.log(this.nuevaCategoria)
+
+                // ENVIO
+                this.$inertia.put('/admin/categorias/' + this.categoria.id, this.nuevaCategoria);
+            }
+        }
+    }
+</script>
