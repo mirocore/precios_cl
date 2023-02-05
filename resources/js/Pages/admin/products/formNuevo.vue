@@ -11,13 +11,13 @@
                         <label for="name" class="inline-block mb-1">Nombre</label>
                         <input 
                             id="name"
-                            class="border border-gray-300  text-gray-500 w-full inline-block px-2 py-2"
+                            class="text-xs border border-gray-300  text-gray-500 w-full inline-block px-2 py-2"
                             placeholder="Ingrese nombre"
                             type="text"
                             v-model="nuevoProducto.name"
                         />
                     </div>
-                    <div class="col-span-6">
+                    <div class="col-span-12 md:col-span-6">
                         <label for="state" class="inline-block mb-1">Estado</label>
                         <select 
                             class="cursor-pointer block w-full text-xs px-2 py-2 border border-gray-300  text-gray-500"
@@ -29,11 +29,11 @@
                         </select>
                     </div>
                     
-                    <div class="col-span-6">
+                    <div class="col-span-12 md:col-span-6">
                         <label for="categoria" class="inline-block mb-1">Categoria</label>
                         <select 
-                            class="cursor-pointer block w-full text-xs px-2 py-2 border border-gray-300  text-gray-500"
-                            id="state"
+                            class="text-xs cursor-pointer block w-full text-xs px-2 py-2 border border-gray-300  text-gray-500"
+                            id="categoria"
                             v-model="nuevoProducto.id_categoria"
                         >
                             <option value="">Seleccione Categoria</option>
@@ -41,22 +41,22 @@
                         </select>
                     </div>
 
-                    <div class="col-span-6">
+                    <div class="col-span-12 md:col-span-6">
                         <label for="amount" class="inline-block mb-1">Cantidad</label>
                         <input 
                             id="amount"
                             type="number"
-                            class="border border-gray-300  text-gray-300 w-full inline-block px-2 py-1"
+                            class="text-xs border border-gray-300  text-gray-300 w-full inline-block px-2 py-1"
                             placeholder="Ingrese cantidad"
                             v-model="nuevoProducto.amount"
                         />
                     </div>
-                    <div class="col-span-6">
-                        <label for="amount" class="inline-block mb-1">Precio</label>
+                    <div class="col-span-12 md:col-span-6">
+                        <label for="price" class="inline-block mb-1">Precio</label>
                         <input 
                             id="price"
                             type="number"
-                            class="border border-gray-300  text-gray-300 w-full inline-block px-2 py-1"
+                            class="text-xs border border-gray-300  text-gray-300 w-full inline-block px-2 py-1"
                             placeholder="Precio de la promo"
                             v-model="nuevoProducto.price"
                         />
