@@ -10,10 +10,20 @@ class Categoria extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
-/* 
+
     public function productos()
     {
-        return $this->belongsTo( Product::class, 'id', 'id_categoria' );
-    } */
+        return $this->hasMany( Product::class, 'id_categoria', 'id' );
+    } 
+
+    public static $rules = [
+        'name' => 'required | unique:categorias',
+    ];
+
+    public static $messages = [
+        'name.required' => 'El campo nombre es obligatorio',
+        'name.unique' => 'La categoría ingresada ya existe en nuestras bases de datos',
+    ];
+
 
 }

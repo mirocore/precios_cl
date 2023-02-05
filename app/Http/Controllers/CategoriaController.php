@@ -16,7 +16,9 @@ class CategoriaController extends Controller
 
     public function index()
     {
-        $categorias = Categoria::latest()->paginate(5);
+        //$categorias = Categoria::latest()->paginate(5);
+        $categorias = Categoria::with('productos')->latest()->paginate(5);
+
 
         return Inertia::render('admin/categorias/listado', [
             'categorias' => $categorias
@@ -29,6 +31,10 @@ class CategoriaController extends Controller
 
     public function store(Request $request){
         
+        // Validacion
+        $request->validate(Categoria::$rules, Categoria:: $messages);
+
+
         $nuevaCategoria = Categoria::create([
             'name' => $request->name
         ]);
@@ -61,7 +67,9 @@ class CategoriaController extends Controller
     }
 
     public function update(Request $request, Categoria $categoria){
-        // TODO VALIDAR
+        
+        // VALIDACION
+        $request->validate(Categoria::$rules, Categoria:: $messages);
         
         $categoria->update( $request->all() );
 

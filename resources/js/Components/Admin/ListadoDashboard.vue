@@ -6,7 +6,7 @@
                     :key="item.id"
                     class="bg-white my-0.5 py-1 px-4 capitalize text-xs text-indigo-800 font-semibold flex justify-between items-center "
                 >
-                    {{ item.name }}
+                    <span>{{ item.name }} <span class="text-xs text-gray-500">({{ item.productos.length }} producto{{item.productos.length > 1 ? "s" : ""}})</span></span>
                     <ul class="flex gap-1 items-center">
                         <li>
                             <nav-link :href="ruta + '/edit/' + item.id" class=" hover:border-0 focus:border-0 mt-1">
