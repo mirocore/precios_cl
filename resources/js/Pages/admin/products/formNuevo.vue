@@ -32,7 +32,7 @@
                     <div class="col-span-12 md:col-span-6">
                         <label for="categoria" class="inline-block mb-1">Categoria</label>
                         <select 
-                            class="text-xs cursor-pointer block w-full text-xs px-2 py-2 border border-gray-300  text-gray-500"
+                            class="text-xs cursor-pointer block w-full px-2 py-2 border border-gray-300  text-gray-500"
                             id="categoria"
                             v-model="nuevoProducto.id_categoria"
                         >
