@@ -15,7 +15,9 @@
                             placeholder="Ingrese nombre"
                             type="text"
                             v-model="producto.name"
+                            :class="[$page.props.errors.name ? 'border-red-500 border-2' : 'border-gray-300']"
                         />
+                        <span v-if="$page.props.errors.name" class="w-full bg-red-300 text-red-800 px-4 py-2 my-1 inline-block text-xs">{{ $page.props.errors.name }}</span>
                     </div>
                     <div class="col-span-12 md:col-span-6">
                         <label for="state" class="inline-block mb-1">Estado</label>
@@ -34,10 +36,12 @@
                             class="cursor-pointer block w-full text-xs px-2 py-2 border border-gray-300  text-gray-500"
                             id="categoria"
                             v-model="producto.id_categoria"
+                            :class="[$page.props.errors.id_categoria ? 'border-red-500 border-2' : 'border-gray-300']"
                         >
                             <option value="">Seleccione Categoria</option>
                             <option v-for="categoria in categorias" :key="categoria.id" :value="categoria.id">{{ categoria.name }}</option>
                         </select>
+                        <span v-if="$page.props.errors.id_categoria" class="w-full bg-red-300 text-red-800 px-4 py-2 my-1 inline-block text-xs">{{ $page.props.errors.id_categoria }}</span>
                     </div>
                     <div class="col-span-12 md:col-span-6">
                         <label for="amount" class="inline-block mb-1">Cantidad</label>
@@ -47,7 +51,9 @@
                             class="text-xs border border-gray-300  text-gray-300 w-full inline-block px-2 py-1"
                             placeholder="Ingrese cantidad"
                             v-model="producto.amount"
+                            :class="[$page.props.errors.amount ? 'border-red-500 border-2' : 'border-gray-300']"
                         />
+                        <span v-if="$page.props.errors.amount" class="w-full bg-red-300 text-red-800 px-4 py-2 my-1 inline-block text-xs">{{ $page.props.errors.amount }}</span>
                     </div>
                     <div class="col-span-12 md:col-span-6">
                         <label for="price" class="inline-block mb-1">Precio</label>
@@ -57,7 +63,9 @@
                             class="text-xs border border-gray-300  text-gray-300 w-full inline-block px-2 py-1"
                             placeholder="Precio de la promo"
                             v-model="producto.price"
+                            :class="[$page.props.errors.price ? 'border-red-500 border-2' : 'border-gray-300']"
                         />
+                        <span v-if="$page.props.errors.price" class="w-full bg-red-300 text-red-800 px-4 py-2 my-1 inline-block text-xs">{{ $page.props.errors.price }}</span>
                     </div>
                     <div class="col-span-12">
                         <button  type="submit" class="bg-blue-500 hover:bg-blue-700 transition-all text-white w-full py-2">Editar Producto</button>
