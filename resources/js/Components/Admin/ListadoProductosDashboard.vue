@@ -1,12 +1,26 @@
 <template>
     <div >
 
-        <div class="hidden md:grid grid-cols-12 px-2 py-1 bg-blue-900 text-white text-xs">
-            <div class="col-span-4">Producto</div>
-            <div class="col-span-2 text-center">Categoría</div>
-            <div class="col-span-2 text-center">Estado</div>
-            <div class="col-span-1 text-center">Cantidad</div>
-            <div class="col-span-1 text-center">Precio</div>
+        <div class="hidden md:grid grid-cols-12 px-2 py-1 bg-blue-900 text-white text-xs items-center">
+            <div class="col-span-4">
+                <NavLink class="text-white p-0 m-0 text-xs pt-0 hover:text-green-500" :href="'/admin/productos?orden=name&dir=' + dir">Cantidad</NavLink>
+
+            </div>
+            <div class="col-span-2 text-center">
+                <NavLink class="text-white p-0 m-0 text-xs pt-0 hover:text-green-500" :href="'/admin/productos?orden=id_categoria&dir=' + dir">Categoria</NavLink>
+
+            </div>
+            <div class="col-span-2 text-center">
+                <NavLink class="text-white p-0 m-0 text-xs pt-0 hover:text-green-500" :href="'/admin/productos?orden=state&dir=' + dir">Estado</NavLink>
+
+            </div>
+            <div class="col-span-1 text-center">
+                <NavLink class="text-white p-0 m-0 text-xs pt-0 hover:text-green-500" :href="'/admin/productos?orden=amount&dir=' + dir">Cantidad</NavLink>
+            </div>
+            <div class="col-span-1 text-center">
+                <NavLink class="text-white p-0 m-0 text-xs pt-0 hover:text-green-500" :href="'/admin/productos?orden=price&dir=' + dir">Precio</NavLink>
+
+            </div>
             <div class="col-span-1 text-center">Unidad</div>
             <div class="col-span-1 text-center">Acciones</div>
         </div>
@@ -144,7 +158,8 @@ import Swal from 'sweetalert2'
 export default {
     props:{
         listado: Object,
-        ruta: String
+        ruta: String,
+        dir: String,
     },
     components:{
         NavLink

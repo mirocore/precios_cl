@@ -16,10 +16,18 @@ class ProductController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
-        $products = Product::with('categoria')->latest()->paginate(5);
+    public function index(Request $request){
+
+        $orden = $request->input('orden') ? $request->input('orden') : "created_at" ;
+        $dir = $request->input('dir') ? $request->input('dir') : 'desc';
+        $products = Product::with('categoria')
+                                ->orderBy($orden, $dir)
+                                ->paginate(5);
+
         return Inertia::render('admin/products/listado', [
-            'products' => $products
+            'products' => $products,
+            'orden' => $orden,
+            'dir' => $dir,
         ]);
     }
 
@@ -58,7 +66,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $producto){
         
         // VALIDACION
-        $request->validate(Product::$rules, Product::$messages);
+        $request->validate(Product::$rulesEdit, Product::$messages);
         
         $producto->update( $request->all() );
 

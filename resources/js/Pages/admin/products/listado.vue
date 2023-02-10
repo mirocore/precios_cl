@@ -14,6 +14,7 @@
         <ListadoDashboard 
             :listado="products"
             :ruta="rutaEdit"
+            :dir="generateDir"
         />
     </AdminLayout>
 </template>
@@ -32,7 +33,9 @@ export default{
         AvisoFlash
     },
     props:{
-        products: Object
+        products: Object,
+        orden: String,
+        dir: String
     },
     computed: {
         tituloTXT(){
@@ -46,7 +49,17 @@ export default{
         },
         rutaEdit(){
             return "/admin/productos";
+        },
+        generateDir(){
+            if(this.dir === "asc"){
+                return "desc";
+            }else{
+                return "asc"
+            }
         }
+    },
+    created(){
+        console.log(this.$router)
     }
 }
 

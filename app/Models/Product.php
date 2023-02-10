@@ -25,6 +25,13 @@ class Product extends Model
         'price' => 'required | numeric'
     ];
 
+    public static $rulesEdit = [
+        'name' => 'required | min:5',
+        'id_categoria' => 'required',
+        'amount' => 'required | numeric',
+        'price' => 'required | numeric'
+    ];
+
     public static $messages = [
         'name.required' => 'El campo Nombre es obligatorio',
         'name.unique' => 'Ya existe un producto con ese nombre en nuestra base de datos',
