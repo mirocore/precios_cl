@@ -6,7 +6,6 @@
         >
         
         <Sidebar 
-            class="hidden md:block"
         />
 
         <div id="admin__content" class="bg-gray-200 col-span-12 md:col-span-10  text-slate-600">
