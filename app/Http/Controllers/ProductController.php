@@ -22,7 +22,14 @@ class ProductController extends Controller
         $dir = $request->input('dir') ? $request->input('dir') : 'desc';
         $products = Product::with('categoria')
                                 ->orderBy($orden, $dir)
-                                ->paginate(5);
+                                ->paginate(10);
+        foreach ($products as $prod) {
+            $prod["unit"] = $prod["price"] / $prod["amount"];
+            $prod["unit"] = $formatted = number_format($prod["unit"], 2, '.', '');
+            ;
+            $prod["categoria_nombre"] = $prod["categoria"]["name"]; 
+        }
+
 
         return Inertia::render('admin/products/listado', [
             'products' => $products,

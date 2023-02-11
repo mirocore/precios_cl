@@ -1,9 +1,17 @@
 <template>
     <div class="bg-indigo-300 min-h-screen ">
 
+
         <header class="flex justify-between items-center flex-wrap p-4 bg-blue-900 text-white">
             <p class="text-xs md:text-lg font-bold">Central Limpieza</p>
-            <NavLink href="/login" class="text-xs block bg-sky-500 hover:bg-sky-600 transition-all text-white rounded-md px-3 py-1 border-0">Login</NavLink>            
+            <NavLink v-if="!$page.props.user" href="/login" class="text-xs block bg-sky-500 hover:bg-sky-600 transition-all text-white rounded-md px-3 py-1 border-0">Login</NavLink> 
+            
+            <div v-if="$page.props.user" class="flex justify-end items-center gap-3 ">
+                <p class="hidden md:flex">Hola {{ $page.props.user.name }}</p>           
+                <NavLink  href="/admin/productos" class="text-xs inline-block bg-sky-500 hover:bg-sky-600 transition-all text-white rounded-md px-3 py-1 border-0">
+                    Panel
+                </NavLink>            
+            </div>
         </header>
 
         <div class="py-5 px-3 md:px-10">
@@ -45,9 +53,6 @@ export default {
     },
     components:{
         NavLink
-    },
-    created(){
-        console.log(this.categorias)
     },
     methods:{
         redondear(num){

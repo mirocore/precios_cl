@@ -64,8 +64,5 @@ import AvisoFlash from '../../../Components/Admin/AvisoFlash.vue';
                 return '/admin/categorias';
             }
         },
-        created(){
-            console.log(this.categorias)
-        }
     }
 </script>

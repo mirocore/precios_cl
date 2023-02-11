@@ -76,9 +76,6 @@ export default {
                     }
                 })
             },
-    },
-    created(){
-        console.log(this.listado)
     }
 }
 </script>

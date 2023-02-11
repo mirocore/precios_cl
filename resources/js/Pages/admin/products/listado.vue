@@ -14,7 +14,8 @@
         <ListadoDashboard 
             :listado="products"
             :ruta="rutaEdit"
-            :dir="generateDir"
+            :dir="dir"
+            :orden="orden"
         />
     </AdminLayout>
 </template>
@@ -49,17 +50,7 @@ export default{
         },
         rutaEdit(){
             return "/admin/productos";
-        },
-        generateDir(){
-            if(this.dir === "asc"){
-                return "desc";
-            }else{
-                return "asc"
-            }
         }
-    },
-    created(){
-        console.log(this.$router)
     }
 }
 
