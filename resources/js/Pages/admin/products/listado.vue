@@ -11,11 +11,19 @@
                 :type="$page.props.flash.message.type"
             />
         </div>
+        <div class="mb-4">
+            <select @change="filtrarCategoria"  class="text-xs p-1 capitalize" v-model="categoria">
+                <option value="" v-if="!categoria">Filtrar por categoria</option>
+                <option value="" v-else>Ver todas las categorías</option>
+                <option class="capitalize" v-for="categoria in categorias" :key="categoria.id" :value="categoria.id">{{ categoria.name }}</option>
+            </select>
+        </div>
         <ListadoDashboard 
             :listado="products"
             :ruta="rutaEdit"
             :dir="dir"
             :orden="orden"
+            :categoria="categoria"
         />
     </AdminLayout>
 </template>
@@ -36,7 +44,9 @@ export default{
     props:{
         products: Object,
         orden: String,
-        dir: String
+        dir: String,
+        categorias: Array,
+        categ: String
     },
     computed: {
         tituloTXT(){
@@ -51,6 +61,31 @@ export default{
         rutaEdit(){
             return "/admin/productos";
         }
+    },
+    data(){
+        return{
+            categoria: "all"
+        }
+    },
+    methods:{
+        filtrarCategoria(){
+            console.log(this.categoria);
+            let ruta = "/admin/productos?";
+            if(this.orden){
+                ruta += `orden=${this.orden}`
+            }
+            if(this.dir){
+                ruta += `&dir=${this.dir}`
+            }
+            if(this.categoria !== "all"){
+                ruta += `&categ=${this.categoria}`
+                this.$inertia.get(ruta);
+            }
+            console.log(ruta);
+        }
+    },
+    created(){
+        this.categoria = this.categ
     }
 }
 

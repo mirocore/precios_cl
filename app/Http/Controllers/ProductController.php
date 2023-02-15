@@ -17,12 +17,19 @@ class ProductController extends Controller
     }
 
     public function index(Request $request){
-
+        
         $orden = $request->input('orden') ? $request->input('orden') : "created_at" ;
         $dir = $request->input('dir') ? $request->input('dir') : 'desc';
+        $categoria = $request->input('categ') ? $request->input('categ') : '';
+
         $products = Product::with('categoria')
                                 ->orderBy($orden, $dir)
+                                ->when($categoria, function ($query, $categoria) {
+                                    $query->where('id_categoria', $categoria);
+                                })
                                 ->paginate(10);
+
+        // CALCULO EL PRECIO POR UNIDAD                        
         foreach ($products as $prod) {
             $prod["unit"] = $prod["price"] / $prod["amount"];
             $prod["unit"] = $formatted = number_format($prod["unit"], 2, '.', '');
@@ -30,11 +37,15 @@ class ProductController extends Controller
             $prod["categoria_nombre"] = $prod["categoria"]["name"]; 
         }
 
+        // LISTADO DE CATEGORIAS PARA EL FILTRO
+        $categorias = Categoria::all();
 
         return Inertia::render('admin/products/listado', [
             'products' => $products,
             'orden' => $orden,
             'dir' => $dir,
+            'categorias' => $categorias,
+            'categ' => $categoria
         ]);
     }
 
@@ -106,7 +117,7 @@ class ProductController extends Controller
 
         $producto->save();
 
-        return redirect()->route('products.index')->with('message', [
+        return redirect()->back()->with('message', [
             "type" => "success",
             "msg" => "Se ha editado exitosamente el estado del producto: '" .  $producto->name  . "'"
         ]);

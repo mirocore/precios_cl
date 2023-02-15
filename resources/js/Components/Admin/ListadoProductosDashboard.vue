@@ -116,12 +116,13 @@ import NavLink from '@/Components/NavLink.vue';
 import Swal from 'sweetalert2'
 
 export default {
-    props:{
-        listado: Object,
-        ruta: String,
-        dir: String,
-        orden: String,
-    },
+    props:[
+        "listado",
+        "ruta", 
+        "dir",
+        "orden",
+        "categoria"
+    ],
     components:{
         NavLink
     },
@@ -145,10 +146,17 @@ export default {
             this.$inertia.put(`${this.ruta}/estado/${id}`);
         },
         ordenarTabla(item){
+            console.log(this.props)
             if(this.orden !== item){
                 console.log("El orden seleccionado es distinto al actual")
                 let direccion = "asc";
-                this.$inertia.get(`/admin/productos?orden=${item}&dir=${direccion}`);
+                let ruta = `/admin/productos?orden=${item}&dir=${direccion}`;
+                if(this.categoria !== "all"){
+                    ruta += `&categ=${this.categoria}`
+                    this.$inertia.get(ruta);
+                }
+                console.log(ruta)
+                this.$inertia.get(ruta);
             }else{
                 console.log("El orden seleccionado es igual al actual")
                 let direccion = "asc";
@@ -157,7 +165,14 @@ export default {
                 }else{
                     direccion = "desc";
                 }
-                this.$inertia.get(`/admin/productos?orden=${item}&dir=${direccion}`);
+                let ruta = `/admin/productos?orden=${item}&dir=${direccion}`
+                if(this.categoria !== "all"){
+                    ruta += `&categ=${this.categoria}`
+                    this.$inertia.get(ruta);
+                }
+                
+                console.log(ruta)
+                this.$inertia.get(ruta);
             }
         },
     }
