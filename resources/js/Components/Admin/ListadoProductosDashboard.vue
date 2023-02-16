@@ -1,7 +1,7 @@
 <template>
     <div >
 
-        <div class="hidden md:grid grid-cols-12 px-2 py-1 bg-blue-900 text-white text-xs items-center">
+        <div v-if="!TH" class="hidden md:grid grid-cols-12 px-2 py-1 bg-blue-900 text-white text-xs items-center">
             <div class="col-span-4">
                 <button 
                     class="text-white p-0 m-0 text-xs pt-0 hover:text-green-500"
@@ -37,6 +37,18 @@
             <div class="col-span-1 text-center">Unidad</div>
             <div class="col-span-1 text-center">Acciones</div>
         </div>
+
+        <div v-if="TH" class="hidden md:grid grid-cols-12 px-2 py-1 bg-blue-900 text-white text-xs items-center">            
+            <div class="col-span-4">Productos</div>
+            <div class="col-span-2 text-center">Categoria</div>
+            <div class="col-span-2 text-center">Estado</div>
+            <div class="col-span-1 text-center">Cantidad</div>
+            <div class="col-span-1 text-center">Precio</div>
+            <div class="col-span-1 text-center">Unidad</div>
+            <div class="col-span-1 text-center">Acciones</div>
+        </div>
+
+
         <div  v-for="item in listado.data" :key="item.id" 
             class="
                     even:bg-sky-100 
@@ -121,7 +133,8 @@ export default {
         "ruta", 
         "dir",
         "orden",
-        "categoria"
+        "categoria",
+        "TH"
     ],
     components:{
         NavLink

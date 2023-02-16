@@ -11,19 +11,41 @@
                 :type="$page.props.flash.message.type"
             />
         </div>
-        <div class="mb-4">
-            <select @change="filtrarCategoria"  class="text-xs p-1 capitalize" v-model="categoria">
+        <div class="mb-4 flex justify-between items-center">
+            <select  class="text-xs p-1 capitalize" v-model="categoria">
                 <option value="" v-if="!categoria">Filtrar por categoria</option>
                 <option value="" v-else>Ver todas las categorías</option>
                 <option class="capitalize" v-for="categoria in categorias" :key="categoria.id" :value="categoria.id">{{ categoria.name }}</option>
             </select>
+            <div>
+                <input 
+                    type="text"
+                    placeholder="Buscar Producto"
+                    id="buscar"
+                    v-model="busqueda"
+                    class="text-xs p-1"
+                    @change="filtrarBusqueda"
+                />
+            </div>
         </div>
-        <ListadoDashboard 
+        <p v-if="sinResultados" class="mb-10 mt-5 text-xs bg-red-300 text-red-900  py-5 px-4">No se han encontrado resultados para la búsqueda <span class="font-bold">"{{ busqueda }}"</span></p>
+        <ListadoDashboard
+            v-if="!listaFiltrada" 
             :listado="products"
             :ruta="rutaEdit"
             :dir="dir"
             :orden="orden"
             :categoria="categoria"
+            :TH="false"
+        />
+        <ListadoDashboard
+            v-else 
+            :listado="listaFiltrada"
+            :ruta="rutaEdit"
+            :dir="dir"
+            :orden="orden"
+            :categoria="categoria"
+            :TH="true"
         />
     </AdminLayout>
 </template>
@@ -64,7 +86,10 @@ export default{
     },
     data(){
         return{
-            categoria: "all"
+            categoria: "all",
+            busqueda: "",
+            listaFiltrada:null,
+            sinResultados: false
         }
     },
     methods:{
@@ -82,10 +107,40 @@ export default{
                 this.$inertia.get(ruta);
             }
             console.log(ruta);
+        },
+        filtrarBusqueda(){
+            if(this.busqueda === ""){
+                this.sinResultados = false;
+                this.listaFiltrada = null;
+                return
+            }
+            console.log("Busqueda:", this.busqueda);
+            let data = [...this.products.data];
+            let nuevaData = data.filter( item => item.name.toLowerCase().includes(this.busqueda.toLowerCase()) );
+            let nuevaLista =  {...this.products, data : nuevaData};
+            console.log(nuevaLista)
+            if(nuevaLista.data.length > 0){
+                console.log("1")
+                this.listaFiltrada = {...nuevaLista};
+                this.sinResultados = false;
+                return
+            }else{
+                console.log("2")
+                this.sinResultados = true;
+                this.listaFiltrada = null;
+                return
+            }
+            
+            
         }
     },
     created(){
         this.categoria = this.categ
+    },
+    watch:{
+        busqueda(){
+            this.filtrarBusqueda();
+        }
     }
 }
 
