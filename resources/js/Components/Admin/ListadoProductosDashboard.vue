@@ -62,7 +62,7 @@
                 "
         >
             <div class="text-xs col-span-12 md:col-span-4 text-center md:text-left font-bold text-blue-800" >{{ item.name }} </div>
-            <div class="col-span-12 md:col-span-2 text-xs text-center capitalize" ><span class="font-bold inline-block md:hidden mr-1">Categoría: </span>{{ item.categoria.name }}</div>
+            <div class="col-span-12 md:col-span-2 text-xs text-center capitalize" ><span class="font-bold inline-block md:hidden mr-1">Categoría: </span>{{ item.id_categoria ? item.categoria.name : "Sin categoría"}}</div>
             <div class="hidden md:inline-flex justify-center col-span-12 md:col-span-2">
 
                 <span @click="cambiarEstado(item.id)" class="text-xs cursor-pointer hover:text-white transition-all bg-green-300 text-green-800 px-2 py-1 rounded-md inline-flex justify-between items-center " v-if="item.state === 1">

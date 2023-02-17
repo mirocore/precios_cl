@@ -20,9 +20,11 @@ return new class extends Migration
             $table->integer('amount');
             $table->decimal('price', 7,2);
             $table->integer('state');
-            $table->integer('id_categoria')->unsigned()->default(1);
+            $table->integer('id_categoria')->unsigned();
 
-            $table->foreign('id_categoria')->references('id')->on('categorias');
+            $table->foreign('id_categoria')->references('id')->on('categorias')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });
