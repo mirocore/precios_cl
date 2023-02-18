@@ -102,19 +102,19 @@
         </div>
 
 
-        <div v-if="listado" class="flex justify-end items-center">
+        <div v-if="listado" class="flex justify-center items-center mt-5">
             <nav aria-label="Page navigation example">
                 <ul class="flex list-style-none">
                     <li>
-                        <nav-link :href="listado.prev_page_url">&laquo;</nav-link>
+                        <nav-link :href="listado.prev_page_url" class="w-7 h-7 flex justify-center items-center">&laquo;</nav-link>
                     </li>
-                    <li v-for="(paginador, index) in listado.links" :key="paginador.label" class="page-item">
+                    <li v-for="(paginador, index) in listado.links" :key="paginador.label" class="page-item ">
                         <nav-link :href="paginador.url" :active="paginador.active">
-                            <span v-if="index !== 0 && index !== listado.links.length - 1">{{ paginador.label }}</span>
+                            <span class="w-7 h-7 flex justify-center items-center" :class="paginador.active ? 'bg-sky-500 text-white' : null" v-if="index !== 0 && index !== listado.links.length - 1">{{ paginador.label }}</span>
                         </nav-link>
                     </li>
                     <li>
-                        <nav-link :href="listado.next_page_url">&raquo;</nav-link>
+                        <nav-link :href="listado.next_page_url" class="w-7 h-7 flex justify-center items-center">&raquo;</nav-link>
                     </li>
                 </ul>
 
